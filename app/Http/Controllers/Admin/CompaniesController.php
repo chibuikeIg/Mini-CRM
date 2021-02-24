@@ -32,7 +32,7 @@ class CompaniesController extends Controller
 
             'name' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:companies'],
-            'url'       => ['required', 'url'],
+            'url'       => ['required', 'url', 'unique:companies'],
             'password'   => ['required', 'string', 'min:8'],
             'logo'       => ['required']
         
@@ -48,11 +48,52 @@ class CompaniesController extends Controller
 
             'name' => request('name'),
             'email'=> request('email'),
-            'logo' => str_replace('public/', '/storage/', $this->logo()),
+            'logo' => $this->logo(),
             'url'  => request('url'),
             'password' => Hash::make(request('password'))
 
         ]);
+
+        return response()->json(['success'=>true]);
+
+    }
+
+
+    public function update(Company $company) {
+
+        $validator = Validator::make(request()->all(), [
+
+            'name' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:companies,email,'.$company->id],
+            'url'       => ['required', 'url', 'unique:companies,url,'.$company->id],
+
+        ]);
+
+        if($validator->fails()) {
+
+            return response()->json($validator->errors());
+
+        }
+
+        $company->name = request('name');
+
+        $company->email= request('email');
+
+        $company->url  = request('url');
+
+        if(request()->hasFile('logo')) {
+
+            $company->logo  = $this->logo();
+
+        }
+
+        if(!empty(request('password'))) {
+
+            $company->password = Hash::make( request('password') );
+
+        }
+
+        $company->save();
 
         return response()->json(['success'=>true]);
 
@@ -69,6 +110,6 @@ class CompaniesController extends Controller
 
     public function logo() {
         
-        return request()->logo->store("public/logos");
+        return str_replace('public/', '/storage/', request()->logo->store("public/logos"));
     }
 }
