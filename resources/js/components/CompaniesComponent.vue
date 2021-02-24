@@ -45,39 +45,43 @@
                                 <h5 class="modal-title" id="exampleModalLabel">Create Company</h5>
                             </div>
 
-                            <form>
+                            <form @submit.prevent="createCompany">
                                 <div class="modal-body">
 
                                     <div  class="form-group">
                                         <label>Company Name</label>
-                                        <input type="text" class="form-control" name="company_name">
+                                        <input type="text" class="form-control el" v-model="company.name" name="name">
+                                        <span class="name text-danger" style="font-size:12px;"></span>
                                     </div>
 
                                     <div  class="form-group">
                                         <label>Company Email</label>
-                                        <input type="email" class="form-control" name="company_email">
+                                        <input type="email" class="form-control el" v-model="company.email" name="email">
+                                        <span class="email text-danger" style="font-size:12px;"></span>
                                     </div>
 
                                     <div  class="form-group">
                                         <label>Company Logo</label>
-                                        <input type="file" class="form-control" name="company_logo">
+                                        <input type="file" class="form-control">
                                     </div>
 
                                     <div  class="form-group">
                                         <label>Company Url</label>
-                                        <input type="text" class="form-control" name="company_url">
+                                        <input type="text" class="form-control el" v-model="company.url" name="url">
+                                        <span class="url text-danger" style="font-size:12px;"></span>
                                     </div>
 
                                     <div  class="form-group">
                                         <label>Company Password</label>
-                                        <input type="text" class="form-control" name="company_password">
+                                        <input type="text" class="form-control el" v-model="company.password" name="password">
+                                        <span class="password text-danger" style="font-size:12px;"></span>
                                     </div>
                                     
                                 </div>
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
 
                             </form>
@@ -89,3 +93,70 @@
         </div>
 
 </template>
+
+<script>
+export default {
+
+    data() {
+        
+        return {
+
+            companies : [],
+            company   : {
+                id : '',
+                name : '',
+                email  : '',
+                logo   : '',
+                url    : ''
+            }, 
+
+            company_id : '',
+            pagination : {},
+            edit       : false
+
+        }
+
+    },
+
+    created() {
+
+        this.fetchCompanies()
+
+    },
+
+    methods : {
+
+        fetchCompanies() {
+
+            fetch('/admin/fetch/companies').then( response=>response.json() ).then( response=>{
+
+                console.log(response)
+
+            })
+
+        },
+
+        createCompany () {
+
+            fetch('/admin/companies', {
+
+                method : "POST",
+                body   : JSON.stringify(this.company),
+                headers: {
+                    'content-type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+
+            }).then(response=>response.json()).then(response=>{
+
+                handleError(response)
+                
+                console.log(response)
+
+            }).catch(error=>console.log(error))
+
+        }
+
+    }
+}
+</script>

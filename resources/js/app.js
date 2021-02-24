@@ -32,3 +32,6 @@ Vue.component('companies', require('./components/CompaniesComponent.vue').defaul
 const app = new Vue({
     el: '#app',
 });
+
+
+

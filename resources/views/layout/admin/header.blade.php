@@ -8,7 +8,7 @@
         <meta name="author" content="" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script>
-            window.Laravel = { csrfToken: '{{ csrf_token() }}' }
+            window.Laravel={csrfToken:'{{ csrf_token() }}'}
         </script>
         <title>@yield('title')</title>
         <link href="{{asset('css/styles.css')}}" rel="stylesheet"/>
