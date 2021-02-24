@@ -22,7 +22,7 @@
                 <tbody>
 
                     <tr v-for="company in companies" v-bind:key="company.id">
-                        <td>{{ company.logo }}</td>
+                        <td><img :src="company.logo" width="50" height="50"></td>
                         <td>{{ company.name }}</td>
                         <td>{{ company.email }}</td>
                         <td>{{ company.url }}</td>
@@ -43,7 +43,7 @@
                                 <h5 class="modal-title" id="exampleModalLabel">Create Company</h5>
                             </div>
 
-                            <form @submit.prevent="createCompany">
+                            <form @submit.prevent="createCompany" id="form" enctype="multipart/form-data">
                                 <div class="modal-body">
 
                                     <div  class="form-group">
@@ -60,7 +60,8 @@
 
                                     <div  class="form-group">
                                         <label>Company Logo</label>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control el" name="logo">
+                                        <span class="logo text-danger" style="font-size:12px;"></span>
                                     </div>
 
                                     <div  class="form-group">
@@ -136,12 +137,15 @@ export default {
 
         createCompany () {
 
+            let form = document.querySelector('#form');
+
+            let formData = new FormData(form)
+
             fetch('/admin/companies', {
 
                 method : "POST",
-                body   : JSON.stringify(this.company),
+                body   : formData,
                 headers: {
-                    'content-type': 'application/json',
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
 
@@ -152,14 +156,13 @@ export default {
 
                      this.fetchCompanies();
 
-                     $("#exampleModal").hide()
+                     $("#exampleModal").modal('toggle')
 
                 } else {
                     
                     handleError(response)
 
                 }
-               
 
             }).catch(error=>console.log(error))
 

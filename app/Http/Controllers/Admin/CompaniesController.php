@@ -34,6 +34,7 @@ class CompaniesController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:companies'],
             'url'       => ['required', 'url'],
             'password'   => ['required', 'string', 'min:8'],
+            'logo'       => ['required']
         
         ]);
 
@@ -47,7 +48,7 @@ class CompaniesController extends Controller
 
             'name' => request('name'),
             'email'=> request('email'),
-            'logo' => 'emoty',
+            'logo' => str_replace('public/', '/storage/', $this->logo()),
             'url'  => request('url'),
             'password' => Hash::make(request('password'))
 
@@ -55,5 +56,11 @@ class CompaniesController extends Controller
 
         return response()->json(['success'=>true]);
 
+    }
+
+
+    public function logo() {
+        
+        return request()->logo->store("public/logos");
     }
 }

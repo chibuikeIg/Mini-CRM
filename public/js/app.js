@@ -1939,6 +1939,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1971,11 +1972,12 @@ __webpack_require__.r(__webpack_exports__);
     createCompany: function createCompany() {
       var _this2 = this;
 
+      var form = document.querySelector('#form');
+      var formData = new FormData(form);
       fetch('/admin/companies', {
         method: "POST",
-        body: JSON.stringify(this.company),
+        body: formData,
         headers: {
-          'content-type': 'application/json',
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       }).then(function (response) {
@@ -1984,7 +1986,7 @@ __webpack_require__.r(__webpack_exports__);
         if (response.success == true) {
           _this2.fetchCompanies();
 
-          $("#exampleModal").hide();
+          $("#exampleModal").modal('toggle');
         } else {
           handleError(response);
         }
@@ -37735,7 +37737,11 @@ var render = function() {
         "tbody",
         _vm._l(_vm.companies, function(company) {
           return _c("tr", { key: company.id }, [
-            _c("td", [_vm._v(_vm._s(company.logo))]),
+            _c("td", [
+              _c("img", {
+                attrs: { src: company.logo, width: "50", height: "50" }
+              })
+            ]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(company.name))]),
             _vm._v(" "),
@@ -37769,6 +37775,7 @@ var render = function() {
             _c(
               "form",
               {
+                attrs: { id: "form", enctype: "multipart/form-data" },
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
@@ -37962,7 +37969,15 @@ var staticRenderFns = [
     return _c("div", { staticClass: "form-group" }, [
       _c("label", [_vm._v("Company Logo")]),
       _vm._v(" "),
-      _c("input", { staticClass: "form-control", attrs: { type: "file" } })
+      _c("input", {
+        staticClass: "form-control el",
+        attrs: { type: "file", name: "logo" }
+      }),
+      _vm._v(" "),
+      _c("span", {
+        staticClass: "logo text-danger",
+        staticStyle: { "font-size": "12px" }
+      })
     ])
   },
   function() {
