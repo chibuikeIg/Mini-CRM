@@ -1939,8 +1939,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1962,13 +1960,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     fetchCompanies: function fetchCompanies() {
+      var _this = this;
+
       fetch('/admin/fetch/companies').then(function (response) {
         return response.json();
       }).then(function (response) {
-        console.log(response);
+        _this.companies = response.data;
       });
     },
     createCompany: function createCompany() {
+      var _this2 = this;
+
       fetch('/admin/companies', {
         method: "POST",
         body: JSON.stringify(this.company),
@@ -1979,8 +1981,13 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         return response.json();
       }).then(function (response) {
-        handleError(response);
-        console.log(response);
+        if (response.success == true) {
+          _this2.fetchCompanies();
+
+          $("#exampleModal").hide();
+        } else {
+          handleError(response);
+        }
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -37721,7 +37728,27 @@ var render = function() {
       [_vm._v("\n        Create Company\n    ")]
     ),
     _vm._v(" "),
-    _vm._m(0),
+    _c("table", { staticClass: "table table-bordered table-striped" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.companies, function(company) {
+          return _c("tr", { key: company.id }, [
+            _c("td", [_vm._v(_vm._s(company.logo))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(company.name))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(company.email))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(company.url))]),
+            _vm._v(" "),
+            _vm._m(1, true)
+          ])
+        }),
+        0
+      )
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -37737,7 +37764,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c(
               "form",
@@ -37813,7 +37840,7 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(2),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", [_vm._v("Company Url")]),
@@ -37878,7 +37905,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(4)
               ]
             )
           ])
@@ -37892,43 +37919,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "table table-bordered table-striped" }, [
-      _c("thead", [
-        _c("tr", [
-          _c("th", [_vm._v("S/N")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Company Logo")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Company Name")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Company Email")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Company Url")]),
-          _vm._v(" "),
-          _c("th")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("tbody", [
-        _c("tr", [
-          _c("td", [_vm._v("1")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("sdsfdfd")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("sdssdsd")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("ssdflhksdf")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("sdfjhdskf")]),
-          _vm._v(" "),
-          _c("td", [
-            _c(
-              "a",
-              { staticClass: "btn btn-danger btn-sm", attrs: { href: "#" } },
-              [_c("i", { staticClass: "fa fa-trash" })]
-            )
-          ])
-        ])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Company Logo")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Company Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Company Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Company Url")]),
+        _vm._v(" "),
+        _c("th")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("a", { staticClass: "btn btn-danger btn-sm", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "fa fa-trash" })
       ])
     ])
   },

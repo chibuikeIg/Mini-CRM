@@ -11,7 +11,6 @@
 
                 <thead>
                     <tr>
-                        <th>S/N</th>
                         <th>Company Logo</th>
                         <th>Company Name</th>
                         <th>Company Email</th>
@@ -22,12 +21,11 @@
 
                 <tbody>
 
-                    <tr>
-                        <td>1</td>
-                        <td>sdsfdfd</td>
-                        <td>sdssdsd</td>
-                        <td>ssdflhksdf</td>
-                        <td>sdfjhdskf</td>
+                    <tr v-for="company in companies" v-bind:key="company.id">
+                        <td>{{ company.logo }}</td>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.email }}</td>
+                        <td>{{ company.url }}</td>
                         <td>
                             <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                         </td>
@@ -130,7 +128,7 @@ export default {
 
             fetch('/admin/fetch/companies').then( response=>response.json() ).then( response=>{
 
-                console.log(response)
+                this.companies = response.data
 
             })
 
@@ -149,9 +147,19 @@ export default {
 
             }).then(response=>response.json()).then(response=>{
 
-                handleError(response)
-                
-                console.log(response)
+
+                if(response.success == true)  {
+
+                     this.fetchCompanies();
+
+                     $("#exampleModal").hide()
+
+                } else {
+                    
+                    handleError(response)
+
+                }
+               
 
             }).catch(error=>console.log(error))
 

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+
+use App\Models\Company;
 
 class CompaniesController extends Controller
 {
@@ -16,7 +19,10 @@ class CompaniesController extends Controller
 
     public function fetchCompanies() {
 
-        return response()->json(['data'=>['hello word']]);
+
+        $companies = Company::orderBy('id', 'DESC')->paginate(10);
+
+        return response()->json($companies);
 
     }
 
@@ -25,19 +31,29 @@ class CompaniesController extends Controller
         $validator = Validator::make(request()->all(), [
 
             'name' => ['required'],
-            'email' => ['required'],
-            'url'       => ['required'],
-            'password'   => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:companies'],
+            'url'       => ['required', 'url'],
+            'password'   => ['required', 'string', 'min:8'],
         
         ]);
 
         if($validator->fails()) {
 
             return response()->json($validator->errors());
-            
+
         }
 
-        return response()->json(request()->all());
+        Company::create([
+
+            'name' => request('name'),
+            'email'=> request('email'),
+            'logo' => 'emoty',
+            'url'  => request('url'),
+            'password' => Hash::make(request('password'))
+
+        ]);
+
+        return response()->json(['success'=>true]);
 
     }
 }
