@@ -1986,6 +1986,7 @@ __webpack_require__.r(__webpack_exports__);
         if (response.success == true) {
           _this2.fetchCompanies();
 
+          form.reset();
           $("#exampleModal").modal('toggle');
         } else {
           handleError(response);
@@ -1993,6 +1994,26 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error);
       });
+    },
+    deleteCompany: function deleteCompany(id) {
+      var _this3 = this;
+
+      if (confirm('This company will be permanently deleted. Do you wish to continue ?')) {
+        fetch('/admin/companies/' + id + '/delete', {
+          method: 'DELETE',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        }).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          alert('Company has been removed from the list');
+
+          _this3.fetchCompanies();
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      }
     }
   }
 });
@@ -37749,7 +37770,21 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(company.url))]),
             _vm._v(" "),
-            _vm._m(1, true)
+            _c("td", [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger btn-sm",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteCompany(company.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-trash" })]
+              )
+            ])
           ])
         }),
         0
@@ -37770,7 +37805,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "form",
@@ -37847,7 +37882,7 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _vm._m(2),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", [_vm._v("Company Url")]),
@@ -37893,7 +37928,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control el",
-                      attrs: { type: "text", name: "password" },
+                      attrs: { type: "password", name: "password" },
                       domProps: { value: _vm.company.password },
                       on: {
                         input: function($event) {
@@ -37912,7 +37947,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ]
             )
           ])
@@ -37937,16 +37972,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Company Url")]),
         _vm._v(" "),
         _c("th")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-danger btn-sm", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fa fa-trash" })
       ])
     ])
   },

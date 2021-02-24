@@ -27,7 +27,7 @@
                         <td>{{ company.email }}</td>
                         <td>{{ company.url }}</td>
                         <td>
-                            <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                            <a href="#" @click="deleteCompany(company.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
 
@@ -72,7 +72,7 @@
 
                                     <div  class="form-group">
                                         <label>Company Password</label>
-                                        <input type="text" class="form-control el" v-model="company.password" name="password">
+                                        <input type="password" class="form-control el" v-model="company.password" name="password">
                                         <span class="password text-danger" style="font-size:12px;"></span>
                                     </div>
                                     
@@ -156,6 +156,8 @@ export default {
 
                      this.fetchCompanies();
 
+                     form.reset();
+
                      $("#exampleModal").modal('toggle')
 
                 } else {
@@ -165,6 +167,29 @@ export default {
                 }
 
             }).catch(error=>console.log(error))
+
+        },
+
+        deleteCompany(id) {
+
+            if(confirm('This company will be permanently deleted. Do you wish to continue ?')) {
+
+                fetch('/admin/companies/'+id+'/delete', {
+
+                    method : 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+
+                }).then(response=>response.json()).then(response=>{
+
+                    alert('Company has been removed from the list');
+
+                    this.fetchCompanies();
+
+                }).catch(error=>console.log(error))
+
+            }
 
         }
 

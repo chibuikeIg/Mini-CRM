@@ -32,4 +32,6 @@ Route::group(['prefix'=>'admin'], function(){
 
     Route::post('/companies', [App\Http\Controllers\Admin\CompaniesController::class, 'store']);
 
+    Route::delete('/companies/{company}/delete', [App\Http\Controllers\Admin\CompaniesController::class, 'delete']);
+
 });

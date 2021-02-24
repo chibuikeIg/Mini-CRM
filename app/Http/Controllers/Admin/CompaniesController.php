@@ -59,6 +59,14 @@ class CompaniesController extends Controller
     }
 
 
+    public function delete(Company $company) {
+
+        $company->delete();
+
+        return response()->json(['success'=>true]);
+    }
+
+
     public function logo() {
         
         return request()->logo->store("public/logos");
