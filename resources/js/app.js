@@ -21,6 +21,7 @@ window.Vue = require('vue').default;
 
 Vue.component('t-header', require('./components/HeaderComponent.vue').default);
 Vue.component('sidebar', require('./components/SidebarComponent.vue').default);
+Vue.component('companies', require('./components/CompaniesComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

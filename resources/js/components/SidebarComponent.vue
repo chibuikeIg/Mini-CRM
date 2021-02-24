@@ -3,13 +3,13 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-<!-- {{ route('admin.home') }} -->
+
                     <a class="nav-link text-white mt-2" :href="admin_home">
                         <i class="fa fa-home mr-2"></i>Dashboard
                     </a>
 
-                    <a class="nav-link text-white mt-2" :href="admin_companies_create">
-                        <i class="fa fa-plus mr-2"></i>Create Companies
+                    <a class="nav-link text-white mt-2" :href="admin_companies">
+                        <i class="fa fa-building mr-2"></i> Companies
                     </a>
                     
                 </div>
@@ -25,7 +25,7 @@ export default {
             required: true,
             type: String
         },
-        admin_companies_create :{
+        admin_companies :{
             required: true,
             type: String
         }

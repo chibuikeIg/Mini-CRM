@@ -26,10 +26,10 @@ Route::group(['prefix'=>'admin'], function(){
 
     })->name('admin.home');
 
-    Route::get('/companies/create', function() {
+    Route::get('/companies', function() {
 
-        return view('admin.companies.create');
+        return view('admin.companies.index');
 
-    })->name('admin.companies.create');
+    })->name('admin.companies');
 
 });
