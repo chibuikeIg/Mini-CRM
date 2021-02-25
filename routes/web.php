@@ -106,6 +106,8 @@ Route::group(['prefix'=>'employee'], function(){
 
         Route::post('/profile/update', [App\Http\Controllers\Employee\AccountController::class, 'update']);
 
+        Route::post('/change/password', [App\Http\Controllers\Employee\PasswordController::class, 'update']);
+
 
     });
 

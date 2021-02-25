@@ -1,4 +1,4 @@
-    <footer class="footer mt-auto py-3 bg-light" style="position:absolute;bottom:0px;width:100%;">
+    <footer class="footer mt-auto py-3 bg-light">
         <div class="container">
             <div class="text-muted">Copyright &copy; Paul Chibuike Igweze <span id="y"></span></div>
         </div>
