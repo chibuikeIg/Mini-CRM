@@ -27,7 +27,7 @@
                         <td>{{ employee.email }}</td>
                         <td>{{ employee.created_at }}</td>
                         <td>
-                            <a href="#"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                            <a href="#" @click="deleteEmployee(employee.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                             <a href="#"  class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                         </td>
                     </tr>
@@ -200,6 +200,29 @@ export default {
             this.fetchCompanies()
 
             $("#saveEmployeeModal").modal('toggle')
+
+        },
+
+        deleteEmployee(id) {
+
+            if(confirm('This Employee will be permanently deleted. Do you wish to continue ?')) {
+
+                fetch('/admin/employees/'+id+'/delete', {
+
+                    method : 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+
+                }).then(response=>response.json()).then(response=>{
+
+                    alert('Employee has been removed from the list');
+
+                    this.fetchEmployees();
+
+                }).catch(error=>console.log(error))
+
+            }
 
         },
 

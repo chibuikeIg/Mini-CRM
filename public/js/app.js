@@ -2258,6 +2258,26 @@ __webpack_require__.r(__webpack_exports__);
     openModal: function openModal() {
       this.fetchCompanies();
       $("#saveEmployeeModal").modal('toggle');
+    },
+    deleteEmployee: function deleteEmployee(id) {
+      var _this4 = this;
+
+      if (confirm('This Employee will be permanently deleted. Do you wish to continue ?')) {
+        fetch('/admin/employees/' + id + '/delete', {
+          method: 'DELETE',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        }).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          alert('Employee has been removed from the list');
+
+          _this4.fetchEmployees();
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      }
     }
   }
 });
@@ -38412,7 +38432,23 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(employee.created_at))]),
             _vm._v(" "),
-            _vm._m(1, true)
+            _c("td", [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger btn-sm",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteEmployee(employee.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-trash" })]
+              ),
+              _vm._v(" "),
+              _vm._m(1, true)
+            ])
           ])
         }),
         0
@@ -38579,15 +38615,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-danger btn-sm", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fa fa-trash" })
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "btn btn-info btn-sm", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fa fa-edit" })
-      ])
-    ])
+    return _c(
+      "a",
+      { staticClass: "btn btn-info btn-sm", attrs: { href: "#" } },
+      [_c("i", { staticClass: "fa fa-edit" })]
+    )
   },
   function() {
     var _vm = this

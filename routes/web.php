@@ -45,5 +45,7 @@ Route::group(['prefix'=>'admin'], function(){
     Route::get('/fetch/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'fetchEmployees']);
 
     Route::post('/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'store']);
-    
+
+    Route::delete('/employees/{employee}/delete', [App\Http\Controllers\Admin\EmployeeController::class, 'delete']);
+
 });

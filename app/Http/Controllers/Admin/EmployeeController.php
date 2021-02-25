@@ -54,4 +54,11 @@ class EmployeeController extends Controller
         return response()->json(['success'=>true]);
 
     }
+
+    public function delete(Employee $employee) {
+
+        $employee->delete();
+
+        return response()->json(['success'=>true]);
+    }
 }
