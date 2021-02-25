@@ -27,6 +27,12 @@ class Authenticate extends Middleware
             
         }
 
+        if( $request->is('employee') || $request->is('employee/*') ) {
+
+            return route('employee.login.form');
+            
+        }
+
         if ($request->expectsJson()) {
 
             return response()->json(['error' => 'Unauthenticated.'], 401);

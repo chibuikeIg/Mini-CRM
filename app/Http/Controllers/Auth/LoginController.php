@@ -74,26 +74,52 @@ class LoginController extends Controller
 
       return view('company.login');
 
-  } 
+    } 
 
-  public function companyLogin() {
+    public function companyLogin() {
 
-    if(Auth::guard('company')->attempt(['email'=>request('email'), 'password'=>request('password')])) {
+      if(Auth::guard('company')->attempt(['email'=>request('email'), 'password'=>request('password')])) {
 
-      return redirect()->route('company.home');
+        return redirect()->route('company.home');
 
-    }  
+      }  
 
-    return redirect()->back()->with(['error'=>'The credentials provided are invalid']);
+      return redirect()->back()->with(['error'=>'The credentials provided are invalid']);
 
-  }
+    }
 
-  public function companyLogout() {
+    public function companyLogout() {
 
-      Auth::guard('company')->logout();
+        Auth::guard('company')->logout();
 
-      return redirect()->route('company.login.form');
+        return redirect()->route('company.login.form');
 
-  }
+    }
+
+    public function employeeLoginForm() {
+
+      return view('employee.login');
+
+    } 
+
+    public function employeeLogin() {
+
+      if(Auth::guard('employee')->attempt(['email'=>request('email'), 'password'=>request('password')])) {
+
+        return redirect()->route('employee.home');
+
+      }  
+
+      return redirect()->back()->with(['error'=>'The credentials provided are invalid']);
+
+    }
+
+    public function employeeLogout() {
+
+        Auth::guard('employee')->logout();
+
+        return redirect()->route('employee.login.form');
+
+    }
     
 }

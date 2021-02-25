@@ -85,3 +85,24 @@ Route::group(['prefix'=>'company'], function(){
     });
 
 });
+
+Route::group(['prefix'=>'employee'], function(){
+
+    Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'employeeLoginForm'])->name('employee.login.form');
+
+    Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'employeeLogin'])->name('employee.login');
+
+    Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'employeeLogout'])->name('employee.logout');
+
+    Route::group(['middleware' => 'auth:employee'], function() {
+
+        Route::get('/', function(){
+
+            return view('employee.index');
+
+        })->name('employee.home');
+
+
+    });
+
+});
