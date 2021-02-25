@@ -23,6 +23,7 @@ Vue.component('t-header', require('./components/HeaderComponent.vue').default);
 Vue.component('sidebar', require('./components/SidebarComponent.vue').default);
 Vue.component('companies', require('./components/CompaniesComponent.vue').default);
 Vue.component('employees', require('./components/EmployeeComponent.vue').default);
+Vue.component('employees', require('./components/company/EmployeesComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

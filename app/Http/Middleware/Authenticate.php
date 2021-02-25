@@ -21,6 +21,12 @@ class Authenticate extends Middleware
             
         }
 
+        if( $request->is('company') || $request->is('company/*') ) {
+
+            return route('company.login.form');
+            
+        }
+
         if ($request->expectsJson()) {
 
             return response()->json(['error' => 'Unauthenticated.'], 401);
