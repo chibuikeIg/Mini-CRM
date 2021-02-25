@@ -102,6 +102,10 @@ Route::group(['prefix'=>'employee'], function(){
 
         })->name('employee.home');
 
+        Route::get('/show', [App\Http\Controllers\Employee\AccountController::class, 'show']);
+
+        Route::post('/profile/update', [App\Http\Controllers\Employee\AccountController::class, 'update']);
+
 
     });
 
