@@ -11,6 +11,10 @@
                     <a class="nav-link text-white mt-2" :href="admin_companies">
                         <i class="fa fa-building mr-2"></i> Companies
                     </a>
+
+                    <a class="nav-link text-white mt-2" :href="admin_employees">
+                        <i class="fa fa-users mr-2"></i> Employees
+                    </a>
                     
                 </div>
             </div>
@@ -28,7 +32,12 @@ export default {
         admin_companies :{
             required: true,
             type: String
+        },
+        admin_employees :{
+            required: true,
+            type: String
         }
+        
     }
 }
 </script>

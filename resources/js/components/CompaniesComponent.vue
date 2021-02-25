@@ -96,6 +96,7 @@
 </template>
 
 <script>
+
 export default {
 
     data() {
@@ -131,7 +132,7 @@ export default {
 
             fetch('/admin/fetch/companies').then( response=>response.json() ).then( response=>{
 
-                this.companies = response.data
+                this.companies = response
 
             })
 

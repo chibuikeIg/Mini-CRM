@@ -28,9 +28,12 @@
             <div id="layoutSidenav">
 
                <sidebar 
+               
                 admin_home="{{ route('admin.home') }}" 
 
                 admin_companies="{{ route('admin.companies') }}"
+
+                admin_employees="{{ route('admin.employees') }}"
 
                ></sidebar>
 

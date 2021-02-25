@@ -26,6 +26,8 @@ Route::group(['prefix'=>'admin'], function(){
 
     })->name('admin.home');
 
+    // companies
+
     Route::get('/companies', [App\Http\Controllers\Admin\CompaniesController::class, 'index'])->name('admin.companies');
 
     Route::get('/fetch/companies', [App\Http\Controllers\Admin\CompaniesController::class, 'fetchCompanies']);
@@ -36,4 +38,12 @@ Route::group(['prefix'=>'admin'], function(){
 
     Route::post('/companies/{company}/update', [App\Http\Controllers\Admin\CompaniesController::class, 'update']);
 
+    // employees
+
+    Route::get('/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])->name('admin.employees');
+
+    Route::get('/fetch/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'fetchEmployees']);
+
+    Route::post('/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'store']);
+    
 });

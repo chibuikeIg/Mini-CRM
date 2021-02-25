@@ -20,7 +20,7 @@ class CompaniesController extends Controller
     public function fetchCompanies() {
 
 
-        $companies = Company::orderBy('id', 'DESC')->paginate(10);
+        $companies = Company::orderBy('id', 'DESC')->get();
 
         return response()->json($companies);
 
