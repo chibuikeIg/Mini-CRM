@@ -20,34 +20,44 @@ Route::get('/', function () {
 
 Route::group(['prefix'=>'admin'], function(){
 
-    Route::get('/', function(){
+    Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'adminLoginForm'])->name('admin.login.form');
 
-        return view('admin.index');
+    Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'adminLogin'])->name('admin.login');
 
-    })->name('admin.home');
+    Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'adminLogout'])->name('admin.logout');
 
-    // companies
 
-    Route::get('/companies', [App\Http\Controllers\Admin\CompaniesController::class, 'index'])->name('admin.companies');
+    Route::group(['middleware' => 'auth:admin'], function() {
 
-    Route::get('/fetch/companies', [App\Http\Controllers\Admin\CompaniesController::class, 'fetchCompanies']);
+        Route::get('/', function(){
 
-    Route::post('/companies', [App\Http\Controllers\Admin\CompaniesController::class, 'store']);
+            return view('admin.index');
 
-    Route::delete('/companies/{company}/delete', [App\Http\Controllers\Admin\CompaniesController::class, 'delete']);
+        })->name('admin.home');
 
-    Route::post('/companies/{company}/update', [App\Http\Controllers\Admin\CompaniesController::class, 'update']);
+        // companies
 
-    // employees
+        Route::get('/companies', [App\Http\Controllers\Admin\CompaniesController::class, 'index'])->name('admin.companies');
 
-    Route::get('/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])->name('admin.employees');
+        Route::get('/fetch/companies', [App\Http\Controllers\Admin\CompaniesController::class, 'fetchCompanies']);
 
-    Route::get('/fetch/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'fetchEmployees']);
+        Route::post('/companies', [App\Http\Controllers\Admin\CompaniesController::class, 'store']);
 
-    Route::post('/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'store']);
+        Route::delete('/companies/{company}/delete', [App\Http\Controllers\Admin\CompaniesController::class, 'delete']);
 
-    Route::delete('/employees/{employee}/delete', [App\Http\Controllers\Admin\EmployeeController::class, 'delete']);
+        Route::post('/companies/{company}/update', [App\Http\Controllers\Admin\CompaniesController::class, 'update']);
 
-    Route::post('/employees/{employee}/update', [App\Http\Controllers\Admin\EmployeeController::class, 'update']);
+        // employees
+
+        Route::get('/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'index'])->name('admin.employees');
+
+        Route::get('/fetch/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'fetchEmployees']);
+
+        Route::post('/employees', [App\Http\Controllers\Admin\EmployeeController::class, 'store']);
+
+        Route::delete('/employees/{employee}/delete', [App\Http\Controllers\Admin\EmployeeController::class, 'delete']);
+
+        Route::post('/employees/{employee}/update', [App\Http\Controllers\Admin\EmployeeController::class, 'update']);
+    });
 
 });

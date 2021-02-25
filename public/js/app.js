@@ -2361,6 +2361,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     admin_home: {
@@ -2372,6 +2382,14 @@ __webpack_require__.r(__webpack_exports__);
       type: String
     },
     admin_employees: {
+      required: true,
+      type: String
+    },
+    admin_logout: {
+      required: true,
+      type: String
+    },
+    csrf_token: {
       required: true,
       type: String
     }
@@ -38856,6 +38874,43 @@ var render = function() {
               [
                 _c("i", { staticClass: "fa fa-users mr-2" }),
                 _vm._v(" Employees\n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "nav-link text-white mt-2",
+                attrs: {
+                  href: _vm.admin_logout,
+                  onclick:
+                    "event.preventDefault();\n                                                 document.getElementById('logout-form').submit();"
+                }
+              },
+              [
+                _c("i", {
+                  staticClass:
+                    "fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
+                }),
+                _vm._v("\n                Logout\n                ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "d-none",
+                attrs: {
+                  id: "logout-form",
+                  action: _vm.admin_logout,
+                  method: "POST"
+                }
+              },
+              [
+                _c("input", {
+                  attrs: { type: "hidden", name: "_token" },
+                  domProps: { value: _vm.csrf_token }
+                })
               ]
             )
           ])

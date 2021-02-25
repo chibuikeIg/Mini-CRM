@@ -15,6 +15,16 @@
                     <a class="nav-link text-white mt-2" :href="admin_employees">
                         <i class="fa fa-users mr-2"></i> Employees
                     </a>
+
+                    <a class="nav-link text-white mt-2" :href="admin_logout" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                    </a>
+
+                    <form id="logout-form" :action="admin_logout" method="POST" class="d-none">
+                        <input type="hidden" name="_token" :value="csrf_token">
+                    </form>
                     
                 </div>
             </div>
@@ -35,6 +45,14 @@ export default {
         },
         admin_employees :{
             required: true,
+            type: String
+        },
+        admin_logout : {
+            required:true,
+            type: String
+        },
+        csrf_token : {
+            required:true,
             type: String
         }
         

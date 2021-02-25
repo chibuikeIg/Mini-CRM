@@ -35,7 +35,11 @@
 
                 admin_employees="{{ route('admin.employees') }}"
 
-               ></sidebar>
+                admin_logout= "{{  route('admin.logout') }}" 
+                
+                csrf_token="{{ csrf_token() }}"></sidebar>
+
+               
 
                @yield('content')
 

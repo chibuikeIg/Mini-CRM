@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Hash;
 
 use Carbon\Carbon;
 
@@ -27,7 +28,7 @@ class CreateAdminTable extends Migration
         DB::table('admin')->insert([
 
             'email' => 'test@test.com',
-            'password' => 'password',
+            'password' => Hash::make('password'),
             'created_at' => $now,
             'updated_at' => $now
 
