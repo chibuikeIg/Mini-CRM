@@ -26,6 +26,7 @@ Vue.component('employees', require('./components/EmployeeComponent.vue').default
 Vue.component('employees', require('./components/company/EmployeesComponent.vue').default);
 Vue.component('personal-details', require('./components/employee/PersonalDetailsComponent.vue').default);
 Vue.component('password', require('./components/employee/PasswordComponent.vue').default);
+Vue.component('home-companies', require('./components/home/CompaniesComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
