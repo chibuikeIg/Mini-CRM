@@ -55,6 +55,40 @@ class EmployeeController extends Controller
 
     }
 
+    public function update(Employee $employee) {
+
+        $validator = Validator::make(request()->all(), [
+
+            'name' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:employees,email,'.$employee->id],
+            'company' => ['required']
+
+        ]);
+
+        if($validator->fails()) {
+
+            return response()->json($validator->errors());
+
+        }
+
+        $employee->name = request('name');
+
+        $employee->email= request('email');
+
+        $employee->company_id  = request('company');
+
+        if(!empty(request('password'))) {
+
+            $employee->password = Hash::make( request('password') );
+
+        }
+
+        $employee->save();
+
+        return response()->json(['success'=>true]);
+
+    }
+
     public function delete(Employee $employee) {
 
         $employee->delete();

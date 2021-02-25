@@ -2193,7 +2193,8 @@ __webpack_require__.r(__webpack_exports__);
       employee: {
         id: '',
         name: '',
-        email: ''
+        email: '',
+        company_id: ''
       },
       employee_id: '',
       pagination: {},
@@ -2228,7 +2229,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.edit === false) {
         this.createEmployee(formData, form);
-      } else {// we do update here
+      } else {
+        this.updateEmployee(formData);
       }
     },
     createEmployee: function createEmployee(formData, form) {
@@ -2255,12 +2257,52 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(error);
       });
     },
+    updateEmployee: function updateEmployee(formData) {
+      var _this4 = this;
+
+      fetch('/admin/employees/' + this.employee.employee_id + '/update', {
+        method: "POST",
+        body: formData,
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      }).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        if (response.success == true) {
+          _this4.fetchEmployees();
+
+          $("#saveEmployeeModal").modal('toggle');
+        } else {
+          handleError(response);
+        }
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
     openModal: function openModal() {
+      this.edit = false;
+      this.employee.id = '';
+      this.employee.name = '';
+      this.employee.email = '';
+      this.employee.company_id = '';
       this.fetchCompanies();
+      $(".modal-title").text('Create Employee');
+      $("#saveEmployeeModal").modal('toggle');
+    },
+    editEmployee: function editEmployee(employee) {
+      this.edit = true;
+      this.employee.id = employee.id;
+      this.employee.name = employee.name;
+      this.employee.email = employee.email;
+      this.employee.company_id = employee.company_id;
+      this.employee.employee_id = employee.id;
+      this.fetchCompanies();
+      $(".modal-title").text('Edit Employee Details');
       $("#saveEmployeeModal").modal('toggle');
     },
     deleteEmployee: function deleteEmployee(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       if (confirm('This Employee will be permanently deleted. Do you wish to continue ?')) {
         fetch('/admin/employees/' + id + '/delete', {
@@ -2273,7 +2315,7 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           alert('Employee has been removed from the list');
 
-          _this4.fetchEmployees();
+          _this5.fetchEmployees();
         })["catch"](function (error) {
           return console.log(error);
         });
@@ -38447,7 +38489,19 @@ var render = function() {
                 [_c("i", { staticClass: "fa fa-trash" })]
               ),
               _vm._v(" "),
-              _vm._m(1, true)
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-info btn-sm",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.editEmployee(employee)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-edit" })]
+              )
             ])
           ])
         }),
@@ -38469,7 +38523,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(2),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "form",
@@ -38565,7 +38619,10 @@ var render = function() {
                             "option",
                             {
                               key: company.id,
-                              domProps: { value: company.id }
+                              domProps: {
+                                value: company.id,
+                                selected: _vm.employee.company_id == company.id
+                              }
                             },
                             [_vm._v(_vm._s(company.name))]
                           )
@@ -38580,10 +38637,10 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _vm._m(2)
                 ]),
                 _vm._v(" "),
-                _vm._m(4)
+                _vm._m(3)
               ]
             )
           ])
@@ -38610,16 +38667,6 @@ var staticRenderFns = [
         _c("th")
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn btn-info btn-sm", attrs: { href: "#" } },
-      [_c("i", { staticClass: "fa fa-edit" })]
-    )
   },
   function() {
     var _vm = this

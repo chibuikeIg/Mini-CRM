@@ -28,7 +28,7 @@
                         <td>{{ employee.created_at }}</td>
                         <td>
                             <a href="#" @click="deleteEmployee(employee.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                            <a href="#"  class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                            <a href="#" @click="editEmployee(employee)" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                         </td>
                     </tr>
 
@@ -66,7 +66,7 @@
                                         <label>Employee's Company</label>
                                         <select class="form-control el"  name="company">
                                             <option value="">-- Choose --</option>
-                                            <option v-for="company in companies" v-bind:key="company.id" :value="company.id">{{ company.name }}</option>
+                                            <option v-for="company in companies" v-bind:key="company.id" :value="company.id" :selected="employee.company_id == company.id">{{ company.name }}</option>
                                         </select>
                                         <span class="company text-danger" style="font-size:12px;"></span>
                                     </div>
@@ -108,7 +108,8 @@ export default {
 
                 id   : '',
                 name : '',
-                email: ''
+                email: '',
+                company_id : ''
 
             },
             employee_id : '',
@@ -159,7 +160,7 @@ export default {
 
             } else {
 
-                // we do update here
+                this.updateEmployee(formData)
 
             }
 
@@ -195,12 +196,64 @@ export default {
 
         },
 
+        updateEmployee(formData) {
+
+            fetch('/admin/employees/'+this.employee.employee_id+'/update', {
+
+                method : "POST",
+                body   : formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+
+            }).then(response=>response.json()).then( response =>{
+
+                if(response.success == true)  {
+
+                    this.fetchEmployees();
+
+                    $("#saveEmployeeModal").modal('toggle')
+
+                } else {
+                    
+                    handleError(response)
+
+                }
+
+            }).catch(error=>console.log(error))
+
+        },
+
         openModal () {
+
+            this.edit  = false;
+            this.employee.id         = '' 
+            this.employee.name       = '';
+            this.employee.email      = '';
+            this.employee.company_id = ''
 
             this.fetchCompanies()
 
+            $(".modal-title").text('Create Employee');
+
             $("#saveEmployeeModal").modal('toggle')
 
+        },
+
+         editEmployee(employee) {
+
+            this.edit  = true;
+            this.employee.id         = employee.id 
+            this.employee.name       = employee.name;
+            this.employee.email      = employee.email;
+            this.employee.company_id = employee.company_id
+            this.employee.employee_id = employee.id
+
+            this.fetchCompanies()
+
+            $(".modal-title").text('Edit Employee Details');
+
+            $("#saveEmployeeModal").modal('toggle')
         },
 
         deleteEmployee(id) {

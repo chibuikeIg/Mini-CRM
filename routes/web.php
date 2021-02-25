@@ -48,4 +48,6 @@ Route::group(['prefix'=>'admin'], function(){
 
     Route::delete('/employees/{employee}/delete', [App\Http\Controllers\Admin\EmployeeController::class, 'delete']);
 
+    Route::post('/employees/{employee}/update', [App\Http\Controllers\Admin\EmployeeController::class, 'update']);
+
 });
