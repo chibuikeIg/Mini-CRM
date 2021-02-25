@@ -22,7 +22,7 @@ window.Vue = require('vue').default;
 Vue.component('t-header', require('./components/HeaderComponent.vue').default);
 Vue.component('sidebar', require('./components/SidebarComponent.vue').default);
 Vue.component('companies', require('./components/CompaniesComponent.vue').default);
-Vue.component('employees', require('./components/EmployeeComponent.vue').default);
+Vue.component('a-employees', require('./components/EmployeeComponent.vue').default);
 Vue.component('employees', require('./components/company/EmployeesComponent.vue').default);
 Vue.component('personal-details', require('./components/employee/PersonalDetailsComponent.vue').default);
 Vue.component('password', require('./components/employee/PasswordComponent.vue').default);

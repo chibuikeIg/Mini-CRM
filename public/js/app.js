@@ -2793,7 +2793,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 Vue.component('t-header', __webpack_require__(/*! ./components/HeaderComponent.vue */ "./resources/js/components/HeaderComponent.vue").default);
 Vue.component('sidebar', __webpack_require__(/*! ./components/SidebarComponent.vue */ "./resources/js/components/SidebarComponent.vue").default);
 Vue.component('companies', __webpack_require__(/*! ./components/CompaniesComponent.vue */ "./resources/js/components/CompaniesComponent.vue").default);
-Vue.component('employees', __webpack_require__(/*! ./components/EmployeeComponent.vue */ "./resources/js/components/EmployeeComponent.vue").default);
+Vue.component('a-employees', __webpack_require__(/*! ./components/EmployeeComponent.vue */ "./resources/js/components/EmployeeComponent.vue").default);
 Vue.component('employees', __webpack_require__(/*! ./components/company/EmployeesComponent.vue */ "./resources/js/components/company/EmployeesComponent.vue").default);
 Vue.component('personal-details', __webpack_require__(/*! ./components/employee/PersonalDetailsComponent.vue */ "./resources/js/components/employee/PersonalDetailsComponent.vue").default);
 Vue.component('password', __webpack_require__(/*! ./components/employee/PasswordComponent.vue */ "./resources/js/components/employee/PasswordComponent.vue").default);
