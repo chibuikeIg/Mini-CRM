@@ -45,7 +45,7 @@ Company :
 
 Url     = [https://minicrm.weprodevs.com/company/login](https://minicrm.weprodevs.com/company/login).
 
-Email =  testmail@address.com
+Email =  company@address.com
 
 Password = password
 
@@ -54,7 +54,7 @@ Employee :
 
 Url     = [https://minicrm.weprodevs.com/employee/login](https://minicrm.weprodevs.com/employee/login).
 
-Email =  testmail@address.com
+Email =  employee@address.com
 
 Password = password
 
