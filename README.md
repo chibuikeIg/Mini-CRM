@@ -34,27 +34,27 @@ This is a Full Stack developer assessment project. The task was to create a simp
 
 Admin :  
 
-Url     = [https://minicrm.weprodevs.com/admin/login](https://minicrm.weprodevs.com/admin/login).
+    Url     = [https://minicrm.weprodevs.com/admin/login](https://minicrm.weprodevs.com/admin/login).
 
-Email =  test@test.com
+    Email =  test@test.com
 
-Password = password
+    Password = password
 
 
 Company : 
 
-Url     = [https://minicrm.weprodevs.com/company/login](https://minicrm.weprodevs.com/company/login).
+    Url     = [https://minicrm.weprodevs.com/company/login](https://minicrm.weprodevs.com/company/login).
 
-Email =  company@address.com
+    Email =  company@address.com
 
-Password = password
+    Password = password
 
 
 Employee : 
 
-Url     = [https://minicrm.weprodevs.com/employee/login](https://minicrm.weprodevs.com/employee/login).
+    Url     = [https://minicrm.weprodevs.com/employee/login](https://minicrm.weprodevs.com/employee/login).
 
-Email =  employee@address.com
+    Email =  employee@address.com
 
-Password = password
+    Password = password
 
