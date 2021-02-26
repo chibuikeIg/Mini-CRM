@@ -3,7 +3,7 @@
 
 #### Full Stack Development Of Mini-CRM Built Using Laravel And Vue Js
 
-This is a Full Stack developer assessment project. The task was to create a simple or Mini-CRM to manage companies and it employees. This project was completed in less than 2 days
+This is a Full Stack developer assessment project. The task was to create a simple or Mini-CRM to manage companies and it employees. This project was completed in approximately 2 days
 
 **Project Functionalities**
 
