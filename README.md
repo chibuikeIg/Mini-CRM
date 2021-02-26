@@ -32,7 +32,7 @@ This is a Full Stack developer assessment project. The task was to create a simp
    
 ### How To Test Project
 
-Admin :  
+**Admin** :  
 
     Url     = [https://minicrm.weprodevs.com/admin/login](https://minicrm.weprodevs.com/admin/login).
 
@@ -41,20 +41,20 @@ Admin :
     Password = password
 
 
-Company : 
+**Company** : 
 
-    Url     = [https://minicrm.weprodevs.com/company/login](https://minicrm.weprodevs.com/company/login).
+Url     = [https://minicrm.weprodevs.com/company/login](https://minicrm.weprodevs.com/company/login).
 
-    Email =  company@address.com
+Email =  company@address.com
 
-    Password = password
+Password = password
 
 
-Employee : 
+**Employee** : 
 
-    Url     = [https://minicrm.weprodevs.com/employee/login](https://minicrm.weprodevs.com/employee/login).
+Url     = [https://minicrm.weprodevs.com/employee/login](https://minicrm.weprodevs.com/employee/login).
 
-    Email =  employee@address.com
+Email =  employee@address.com
 
-    Password = password
+Password = password
 
