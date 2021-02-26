@@ -34,11 +34,11 @@ This is a Full Stack developer assessment project. The task was to create a simp
 
 **Admin** :  
 
-    Url     = [https://minicrm.weprodevs.com/admin/login](https://minicrm.weprodevs.com/admin/login).
+Url     = [https://minicrm.weprodevs.com/admin/login](https://minicrm.weprodevs.com/admin/login).
 
-    Email =  test@test.com
+Email =  test@test.com
 
-    Password = password
+Password = password
 
 
 **Company** : 
