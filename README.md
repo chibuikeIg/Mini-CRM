@@ -27,34 +27,5 @@ This is a Full Stack developer assessment project. The task was to create a simp
          - Should have login functionality 
          - Should only be able to update profile details in their dashboard
 
-- Companies listed on home page
-
-   
-### How To Test Project
-
-**Admin** :  
-
-Url     = [https://minicrm.weprodevs.com/admin/login](https://minicrm.weprodevs.com/admin/login).
-
-Email =  test@test.com
-
-Password = password
-
-
-**Company** : 
-
-Url     = [https://minicrm.weprodevs.com/company/login](https://minicrm.weprodevs.com/company/login).
-
-Email =  company@address.com
-
-Password = password
-
-
-**Employee** : 
-
-Url     = [https://minicrm.weprodevs.com/employee/login](https://minicrm.weprodevs.com/employee/login).
-
-Email =  employee@address.com
-
-Password = password
+- List companies on home page
 
